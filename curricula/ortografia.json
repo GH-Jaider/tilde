@@ -1,0 +1,125 @@
+{
+  "id": "ortografia",
+  "name": "Ortografía del español",
+  "spine": "Índice de la Ortografía de la lengua española (RAE y ASALE, 2010), reordenado para hablantes nativos. Tilde solo indexa la estructura; las explicaciones se leen en Wikilengua (CC BY-SA), FundéuRAE (CC BY-SA) y el Diccionario panhispánico de dudas (RAE, consulta libre).",
+  "sources": {
+    "wikilengua": "https://www.wikilengua.org/index.php/",
+    "fundeu": "https://www.fundeu.es/dudas/tipo-de-duda/",
+    "dpd": "https://www.rae.es/dpd/"
+  },
+  "drills": {
+    "silabas": "Cuenta las sílabas de una palabra real. La app comprueba con las reglas de silabeo.",
+    "tildes": "Palabras reales sin tilde: pones la tilde donde va, o dices que no lleva. La respuesta es la palabra tal como está en el diccionario.",
+    "pares": "Una frase real con una palabra en juego (esta/está, solo, porque/por qué). Eliges. La respuesta es el texto original.",
+    "restaurar": "Un párrafo real sin puntuación, tildes o mayúsculas. Lo restauras. La respuesta es el original.",
+    "letras": "Una palabra real con una letra en blanco (s/c/z, b/v, ll/y, h). Eliges. La respuesta es el diccionario.",
+    "leer": "Lees la página enlazada. Cuenta como hecho cuando lo marcas."
+  },
+  "units": [
+    {
+      "id": "tilde", "name": "La tilde", "short": "Tilde", "chapter": "II. La representación gráfica del acento: el uso de la tilde",
+      "exercises": [
+        { "id": "silabas", "name": "Sílabas, diptongos e hiatos", "drill": "silabas", "quota": 40, "unit": "palabras",
+          "read": [{ "site": "wikilengua", "page": "Diptongo", "title": "Diptongo" }, { "site": "wikilengua", "page": "Hiato", "title": "Hiato" }] },
+        { "id": "agudas", "name": "Agudas, llanas y esdrújulas", "drill": "tildes", "rules": ["aguda", "llana", "esdrújula", "sobresdrújula"], "quota": 60, "unit": "palabras",
+          "read": [{ "site": "wikilengua", "page": "Acentuación", "title": "Acentuación" }, { "site": "dpd", "page": "tilde", "title": "tilde (DPD)" }] },
+        { "id": "hiatos", "name": "La tilde en los hiatos", "drill": "tildes", "rules": ["hiato"], "quota": 40, "unit": "palabras",
+          "read": [{ "site": "wikilengua", "page": "Tilde_hiática", "title": "Tilde hiática" }] },
+        { "id": "monosilabos", "name": "Monosílabos y tilde diacrítica", "drill": "pares", "pairs": ["el/él", "tu/tú", "mi/mí", "si/sí", "de/dé", "se/sé", "te/té", "mas/más"], "quota": 30, "unit": "frases",
+          "read": [{ "site": "wikilengua", "page": "Monosílabos_ortográficos", "title": "Monosílabos ortográficos" }, { "site": "wikilengua", "page": "Tilde_diacrítica", "title": "Tilde diacrítica" }] },
+        { "id": "solo-aun", "name": "Solo, los demostrativos y aún", "drill": "pares", "pairs": ["solo/sólo", "aun/aún", "este/éste"], "quota": 20, "unit": "frases",
+          "read": [{ "site": "wikilengua", "page": "solo_(acentuación)", "title": "solo (acentuación)" }, { "site": "fundeu", "page": "acentuacion-y-pronunciacion", "title": "FundéuRAE: acentuación" }] },
+        { "id": "interrogativos", "name": "Qué, cómo, dónde, cuándo", "drill": "pares", "pairs": ["que/qué", "como/cómo", "donde/dónde", "cuando/cuándo", "cuanto/cuánto", "quien/quién", "cual/cuál"], "quota": 30, "unit": "frases",
+          "read": [{ "site": "wikilengua", "page": "Tilde_diacrítica", "title": "Tilde diacrítica" }] },
+        { "id": "mente", "name": "Adverbios en -mente, compuestos y mayúsculas", "drill": "tildes", "rules": ["aguda", "llana", "esdrújula", "sobresdrújula", "hiato"], "quota": 60, "unit": "palabras",
+          "read": [{ "site": "wikilengua", "page": "Acentuación", "title": "Acentuación" }, { "site": "wikilengua", "page": "Lista_de_palabras_que_no_se_acentúan", "title": "Palabras que no se acentúan" }] }
+      ]
+    },
+    {
+      "id": "puntuacion", "name": "La puntuación", "short": "Puntuación", "chapter": "III. El uso de los signos ortográficos",
+      "exercises": [
+        { "id": "punto", "name": "El punto y el párrafo", "drill": "restaurar", "signs": ["."], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Punto", "title": "Punto" }, { "site": "wikilengua", "page": "Puntuación", "title": "Puntuación" }] },
+        { "id": "coma", "name": "La coma", "drill": "restaurar", "signs": [","], "quota": 10, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Coma", "title": "Coma" }, { "site": "wikilengua", "page": "Coma_de_sujeto", "title": "Coma de sujeto (la que no va)" }, { "site": "fundeu", "page": "puntuacion", "title": "FundéuRAE: puntuación" }] },
+        { "id": "coma-y", "name": "Coma con y, coma con pero, sin embargo", "drill": "restaurar", "signs": [","], "quota": 8, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Coma_con_y", "title": "Coma con y" }, { "site": "wikilengua", "page": "sin_embargo", "title": "sin embargo" }] },
+        { "id": "punto-y-coma", "name": "El punto y coma", "drill": "restaurar", "signs": [";"], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Punto_y_coma", "title": "Punto y coma" }] },
+        { "id": "dos-puntos", "name": "Los dos puntos", "drill": "restaurar", "signs": [":"], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Dos_puntos", "title": "Dos puntos" }] },
+        { "id": "suspensivos", "name": "Los puntos suspensivos", "drill": "restaurar", "signs": ["…"], "quota": 4, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Puntos_suspensivos", "title": "Puntos suspensivos" }] },
+        { "id": "interrogacion", "name": "Interrogación y exclamación: los de apertura", "drill": "restaurar", "signs": ["¿", "?", "¡", "!"], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Interrogación", "title": "Interrogación" }, { "site": "wikilengua", "page": "Exclamación", "title": "Exclamación" }] },
+        { "id": "comillas", "name": "Las comillas", "drill": "restaurar", "signs": ["«", "»", "\""], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Comillas", "title": "Comillas" }] },
+        { "id": "raya", "name": "La raya y el diálogo", "drill": "restaurar", "signs": ["—"], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Raya", "title": "Raya" }, { "site": "wikilengua", "page": "Diálogo", "title": "Diálogo" }] },
+        { "id": "parentesis", "name": "Paréntesis, corchetes, guion y barra", "drill": "restaurar", "signs": ["(", ")", "-", "/"], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Paréntesis", "title": "Paréntesis" }, { "site": "wikilengua", "page": "Guion", "title": "Guion" }] }
+      ]
+    },
+    {
+      "id": "mayusculas", "name": "Mayúsculas y minúsculas", "short": "Mayúsculas", "chapter": "IV. El uso de las letras mayúsculas y minúsculas",
+      "exercises": [
+        { "id": "inicial", "name": "Cuándo va mayúscula inicial", "drill": "restaurar", "signs": ["A"], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Mayúscula", "title": "Mayúscula" }, { "site": "fundeu", "page": "mayusculas-y-minusculas", "title": "FundéuRAE: mayúsculas y minúsculas" }] },
+        { "id": "nombres", "name": "Nombres propios, cargos e instituciones", "drill": "restaurar", "signs": ["A"], "quota": 6, "unit": "textos",
+          "read": [{ "site": "fundeu", "page": "mayusculas-y-minusculas", "title": "FundéuRAE: mayúsculas y minúsculas" }, { "site": "dpd", "page": "mayúsculas", "title": "mayúsculas (DPD)" }] },
+        { "id": "titulos", "name": "Títulos, días, meses y gentilicios", "drill": "restaurar", "signs": ["A"], "quota": 6, "unit": "textos",
+          "read": [{ "site": "wikilengua", "page": "Ortotipografía_de_títulos_de_publicaciones", "title": "Títulos de publicaciones" }] }
+      ]
+    },
+    {
+      "id": "juntas", "name": "Juntas o separadas", "short": "Juntas o separadas", "chapter": "V. La representación gráfica de las unidades léxicas",
+      "exercises": [
+        { "id": "porque", "name": "Porque, por qué, porqué y por que", "drill": "pares", "pairs": ["porque/por qué/porqué/por que"], "quota": 20, "unit": "frases",
+          "read": [{ "site": "wikilengua", "page": "porqué", "title": "porqué" }] },
+        { "id": "sino", "name": "Sino y si no, conque y con que", "drill": "pares", "pairs": ["sino/si no", "conque/con que"], "quota": 20, "unit": "frases",
+          "read": [{ "site": "wikilengua", "page": "sino", "title": "sino" }] },
+        { "id": "haber", "name": "A ver y haber, haya y halla", "drill": "pares", "pairs": ["a ver/haber", "haya/halla", "a/ha/ah"], "quota": 20, "unit": "frases",
+          "read": [{ "site": "wikilengua", "page": "a_ver/haber", "title": "a ver / haber" }, { "site": "wikilengua", "page": "haya/halla/aya", "title": "haya / halla / aya" }] },
+        { "id": "otras", "name": "Asimismo, sobre todo, aparte, adonde", "drill": "pares", "pairs": ["asimismo/así mismo", "sobre todo/sobretodo", "aparte/a parte", "adonde/a donde", "demás/de más"], "quota": 20, "unit": "frases",
+          "read": [{ "site": "fundeu", "page": "ortografia-2", "title": "FundéuRAE: ortografía" }] }
+      ]
+    },
+    {
+      "id": "letras", "name": "Las letras que suenan igual", "short": "Letras", "chapter": "I. La representación gráfica de los fonemas: el uso de las letras",
+      "exercises": [
+        { "id": "sz", "name": "S, c y z: el seseo", "drill": "letras", "letters": ["s", "c", "z"], "quota": 60, "unit": "palabras",
+          "read": [{ "site": "fundeu", "page": "ortografia-2", "title": "FundéuRAE: ortografía" }] },
+        { "id": "bv", "name": "B y v", "drill": "letras", "letters": ["b", "v"], "quota": 60, "unit": "palabras",
+          "read": [{ "site": "wikilengua", "page": "Reglas_ortográficas_de_b_y_v", "title": "Reglas de b y v" }] },
+        { "id": "lly", "name": "Ll e y: el yeísmo", "drill": "letras", "letters": ["ll", "y"], "quota": 40, "unit": "palabras",
+          "read": [{ "site": "wikilengua", "page": "valla/vaya/balla/baya", "title": "valla / vaya / baya" }, { "site": "wikilengua", "page": "rallar/rayar", "title": "rallar / rayar" }] },
+        { "id": "h", "name": "La h", "drill": "letras", "letters": ["h", ""], "quota": 40, "unit": "palabras",
+          "read": [{ "site": "wikilengua", "page": "H", "title": "H" }] },
+        { "id": "gj", "name": "G y j", "drill": "letras", "letters": ["g", "j"], "quota": 40, "unit": "palabras",
+          "read": [{ "site": "wikilengua", "page": "G", "title": "G" }] },
+        { "id": "errores", "name": "Palabras que casi todos escriben mal", "drill": "leer", "quota": 1, "unit": "lectura",
+          "read": [{ "site": "wikilengua", "page": "Lista_de_palabras_con_errores_en_su_escritura", "title": "Lista de palabras con errores en su escritura" }] }
+      ]
+    },
+    {
+      "id": "numeros", "name": "Números, abreviaturas y símbolos", "short": "Números", "chapter": "VIII. La ortografía de las expresiones numéricas",
+      "exercises": [
+        { "id": "cifras", "name": "Cifras o letras", "drill": "leer", "quota": 1, "unit": "lectura",
+          "read": [{ "site": "wikilengua", "page": "Número", "title": "Número" }] },
+        { "id": "fechas", "name": "Fechas, horas y porcentajes", "drill": "leer", "quota": 1, "unit": "lectura",
+          "read": [{ "site": "wikilengua", "page": "Abreviaciones_en_fechas", "title": "Abreviaciones en fechas" }, { "site": "wikilengua", "page": "Porcentaje", "title": "Porcentaje" }] },
+        { "id": "abreviaturas", "name": "Abreviaturas, siglas y símbolos", "drill": "leer", "quota": 1, "unit": "lectura",
+          "read": [{ "site": "wikilengua", "page": "Abreviatura", "title": "Abreviatura" }, { "site": "wikilengua", "page": "Abreviación", "title": "Abreviación" }] }
+      ]
+    },
+    {
+      "id": "extranjerismos", "name": "Palabras de otras lenguas y nombres propios", "short": "Extranjerismos", "chapter": "VI–VII. Expresiones procedentes de otras lenguas; nombres propios",
+      "exercises": [
+        { "id": "extranjerismos", "name": "Extranjerismos: cursiva o adaptación", "drill": "leer", "quota": 1, "unit": "lectura",
+          "read": [{ "site": "wikilengua", "page": "Extranjerismo", "title": "Extranjerismo" }, { "site": "fundeu", "page": "lexico-2", "title": "FundéuRAE: léxico" }] },
+        { "id": "nombres-propios", "name": "Topónimos y nombres propios", "drill": "leer", "quota": 1, "unit": "lectura",
+          "read": [{ "site": "wikilengua", "page": "Ortotipografía_en_geografía", "title": "Ortotipografía en geografía" }] }
+      ]
+    }
+  ]
+}
