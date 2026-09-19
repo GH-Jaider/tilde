@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tilde · B · Página</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1B1A17; --paper: #FAF7F0; --paper-2: #F1ECE0; --mute: #7A7568; --hair: #D8D2C3;
+    --red: #B8322A; /* lápiz corrector */
+    --font: "Literata", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) { :root { --ink: #E9E4D8; --paper: #151412; --paper-2: #1D1B17; --mute: #9A9486; --hair: #34312A; --red: #D9483E; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-size: 18px; line-height: 1.45; padding: 32px 16px 96px; font-variation-settings: "opsz" 14; }
+  h1.dir { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); margin: 0 0 6px; }
+  p.about { max-width: 62ch; margin: 0 0 40px; color: var(--mute); }
+  p.about b { color: var(--ink); font-weight: 600; }
+  section { margin: 48px 0; }
+  section > h2 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin: 0 0 14px; font-weight: 600; }
+  .row { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; padding-bottom: 8px; }
+  @media (min-width: 1660px) { .row { flex-wrap: nowrap; } }
+  .frame { flex: none; background: var(--paper); border: 1px solid var(--hair); overflow: hidden; position: relative; }
+  .desk { width: 1180px; height: 740px; }
+  .phone { width: 390px; height: 800px; }
+  .ui { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .cap { font-size: 14px; color: var(--mute); margin-top: 8px; }
+  .sc { font-variant-caps: all-small-caps; letter-spacing: .08em; font-weight: 600; }
+
+  /* running head */
+  .head { display: flex; justify-content: space-between; align-items: baseline; padding: 24px 64px 0; font-size: 14px; color: var(--mute); }
+  .head .logo { color: var(--ink); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; font-variation-settings: "opsz" 72; }
+  .head .logo i { font-style: normal; color: var(--red); }
+  .head .nav span { margin-left: 22px; } .head .nav span.on { color: var(--ink); }
+  .phone .head { padding: 18px 24px 0; } .phone .head .nav span { margin-left: 14px; font-size: 13px; }
+  .rule { height: 1px; background: var(--hair); margin: 14px 64px 0; } .phone .rule { margin: 12px 24px 0; }
+
+  /* today */
+  .page { flex: 1; padding: 36px 64px 0; display: flex; flex-direction: column; max-width: 760px; }
+  .phone .page { padding: 22px 24px 0; }
+  .date { font-style: italic; color: var(--mute); margin-bottom: 26px; }
+  .title { font-size: 44px; line-height: 1.05; font-weight: 500; letter-spacing: -0.015em; margin: 0 0 26px; font-variation-settings: "opsz" 72; }
+  .phone .title { font-size: 32px; }
+  .idx { list-style: none; padding: 0; margin: 0; }
+  .idx li { display: grid; grid-template-columns: 40px 1fr auto; gap: 16px; padding: 16px 0; border-top: 1px solid var(--hair); align-items: baseline; }
+  .idx li:last-child { border-bottom: 1px solid var(--hair); }
+  .idx .n { color: var(--red); font-weight: 600; font-variation-settings: "opsz" 72; font-size: 22px; }
+  .idx .t { font-size: 22px; font-weight: 500; }
+  .idx .s { display: block; color: var(--mute); font-size: 16px; margin-top: 2px; }
+  .idx .m { color: var(--mute); font-size: 15px; white-space: nowrap; }
+  .foot { display: flex; justify-content: space-between; align-items: baseline; padding: 22px 64px 24px; margin-top: auto; }
+  .phone .foot { padding: 18px 24px 22px; }
+  .week { color: var(--mute); font-size: 15px; font-style: italic; }
+  .go { font-size: 26px; font-weight: 500; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
+  .phone .go { font-size: 22px; }
+
+  /* session */
+  .ses { flex: 1; display: flex; flex-direction: column; }
+  .ses .meta { display: flex; justify-content: space-between; padding: 22px 64px 0; font-size: 14px; color: var(--mute); }
+  .phone .ses .meta { padding: 18px 24px 0; }
+  .ses .meta b { color: var(--ink); font-weight: 600; }
+  .word { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 40px; }
+  .w { font-size: 168px; line-height: 1; font-weight: 400; letter-spacing: -0.02em; font-variation-settings: "opsz" 72; }
+  .phone .w { font-size: 82px; }
+  .w u { text-decoration: none; border-bottom: 3px solid var(--red); }
+  .w em { font-style: normal; color: var(--red); }
+  .syl { margin-top: 14px; color: var(--mute); letter-spacing: .3em; font-size: 18px; }
+  .why { margin-top: 26px; font-size: 24px; font-style: italic; max-width: 32ch; }
+  .phone .why { font-size: 19px; }
+  .why b { font-style: normal; font-weight: 600; }
+  .acts { display: flex; justify-content: space-between; align-items: baseline; padding: 0 64px 28px; }
+  .phone .acts { padding: 0 24px 24px; }
+  .lnk { color: var(--mute); border-bottom: 1px solid var(--hair); padding-bottom: 2px; }
+
+  /* muestra */
+  .mu { flex: 1; display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; padding: 36px 64px 0; }
+  .phone .mu { grid-template-columns: 1fr; gap: 24px; padding: 22px 24px 0; }
+  .mu h3 { font-size: 64px; font-weight: 400; letter-spacing: -0.02em; line-height: 1; margin: 0 0 20px; font-variation-settings: "opsz" 72; }
+  .phone .mu h3 { font-size: 40px; }
+  .mu .def { font-size: 19px; margin: 0 0 14px; }
+  .mu .shape { font-style: italic; color: var(--mute); margin: 0 0 24px; }
+  .mu .cta { font-size: 22px; font-weight: 500; border-bottom: 2px solid var(--ink); padding-bottom: 2px; align-self: flex-start; display: inline-block; }
+  .verse { font-size: 24px; line-height: 1.5; }
+  .phone .verse { font-size: 20px; }
+  .verse p { margin: 0; display: flex; justify-content: space-between; gap: 18px; }
+  .verse p b { color: var(--red); font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; align-self: center; }
+  .verse .dc { float: left; font-size: 92px; line-height: .8; padding: 8px 8px 0 0; font-weight: 500; }
+  .src { font-size: 14px; color: var(--mute); margin-top: 22px; font-style: italic; }
+  .count p { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; margin: 0; border-bottom: 1px solid var(--hair); font-size: 21px; }
+  .count b { font-weight: 600; color: var(--red); font-variation-settings: "opsz" 72; font-size: 28px; }
+
+  /* done */
+  .done { flex: 1; padding: 40px 24px 24px; display: flex; flex-direction: column; }
+  .done h3 { font-size: 46px; font-weight: 400; margin: 0 0 8px; letter-spacing: -0.015em; font-variation-settings: "opsz" 72; }
+  .done .sum { font-size: 22px; margin: 0 0 28px; }
+  .done dl { margin: 0; border-top: 1px solid var(--hair); }
+  .done dt { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--red); font-weight: 600; margin-top: 16px; }
+  .done dd { margin: 4px 0 16px; font-size: 18px; }
+  .done .next { margin-top: auto; border-top: 1px solid var(--hair); padding-top: 16px; font-style: italic; color: var(--mute); }
+  .done .next b { color: var(--ink); font-style: normal; font-weight: 500; }
+</style>
+</head>
+<body>
+<h1 class="dir">Dirección B · Página</h1>
+<p class="about"><b>Un libro bien compuesto.</b> Literata, la serif que Google diseñó para leer en pantalla, con tildes y ñ bien dibujadas. Márgenes de libro, filetes de un pixel, un índice en vez de bloques. Un solo color además de la tinta: el rojo del lápiz del corrector, que solo aparece sobre lo que hay que mirar. Nada compite con el texto porque el texto es el asunto.</p>
+
+<section>
+  <h2>Hoy</h2>
+  <div class="row">
+    <div class="frame desk"><div class="ui">
+      <div class="head"><div class="logo">Tild<i>é</i></div><div class="nav sc"><span class="on">Hoy</span><span>Camino</span><span>Muestras</span><span>Diario</span></div></div>
+      <div class="rule"></div>
+      <div class="page">
+        <div class="date">Viernes 19 de septiembre</div>
+        <div class="title">Tres cosas, veinte minutos.</div>
+        <ol class="idx">
+          <li><span class="n">1</span><span><span class="t">Diez tildes</span><span class="s">Calentamiento con palabras que ya viste: canción, examen, raíz, árbol, también.</span></span><span class="m">3 min</span></li>
+          <li><span class="n">2</span><span><span class="t">Agudas, llanas y esdrújulas</span><span class="s">Lección 1, tema 2 de 7. Lee la página en Wikilengua y pon veinte tildes.</span></span><span class="m">12 min</span></li>
+          <li><span class="n">3</span><span><span class="t">Un haiku</span><span class="s">Escribir, opcional. Cinco, siete, cinco; Tilde cuenta las sílabas.</span></span><span class="m">5 min</span></li>
+        </ol>
+      </div>
+      <div class="foot"><div class="week">Tres días de cinco esta semana.</div><div class="go">Empezar</div></div>
+    </div></div>
+    <div class="frame phone"><div class="ui">
+      <div class="head"><div class="logo">Tild<i>é</i></div><div class="nav sc"><span class="on">Hoy</span><span>Camino</span><span>Muestras</span><span>Diario</span></div></div>
+      <div class="rule"></div>
+      <div class="page">
+        <div class="date">Viernes 19 de septiembre</div>
+        <div class="title">Tres cosas, veinte minutos.</div>
+        <ol class="idx">
+          <li><span class="n">1</span><span><span class="t">Diez tildes</span><span class="s">Calentamiento</span></span><span class="m">3 min</span></li>
+          <li><span class="n">2</span><span><span class="t">Agudas, llanas y esdrújulas</span><span class="s">Lección 1, tema 2 de 7</span></span><span class="m">12 min</span></li>
+          <li><span class="n">3</span><span><span class="t">Un haiku</span><span class="s">Escribir, opcional</span></span><span class="m">5 min</span></li>
+        </ol>
+      </div>
+      <div class="foot"><div class="week">Tres de cinco.</div><div class="go">Empezar</div></div>
+    </div></div>
+  </div>
+  <div class="cap">El plan del día es un índice. El número rojo es el único color, y también el orden.</div>
+</section>
+
+<section>
+  <h2>Sesión · calentamiento de tildes</h2>
+  <div class="row">
+    <div class="frame desk"><div class="ui">
+      <div class="ses">
+        <div class="meta"><span><b>1</b> de 3 · Calentamiento · palabra 4 de 10</span><span>2:10</span></div>
+        <div class="word">
+          <div class="w">canci<em>ó</em>n</div>
+          <div class="syl">can · ción</div>
+          <div class="why">Aguda que termina en <b>-n</b>: lleva tilde.</div>
+        </div>
+        <div class="acts"><span class="lnk">Ver la regla en Wikilengua</span><span class="go">Siguiente</span></div>
+      </div>
+    </div></div>
+    <div class="frame phone"><div class="ui">
+      <div class="ses">
+        <div class="meta"><span><b>1</b> de 3 · palabra 4 de 10</span><span>2:10</span></div>
+        <div class="word">
+          <div class="w">c<u>a</u>nc<u>i</u><u>o</u>n</div>
+          <div class="why">Toca la vocal que lleva la tilde.</div>
+        </div>
+        <div class="acts"><span class="lnk">No lleva tilde</span><span class="lnk">Saltar</span></div>
+      </div>
+    </div></div>
+  </div>
+  <div class="cap">Sin botones con fondo: los controles son texto subrayado, como en un libro con notas. La palabra ocupa la página.</div>
+</section>
+
+<section>
+  <h2>Muestra · una forma literaria</h2>
+  <div class="row">
+    <div class="frame desk"><div class="ui">
+      <div class="head"><div class="logo">Tild<i>é</i></div><div class="nav sc"><span>Hoy</span><span>Camino</span><span class="on">Muestras</span><span>Diario</span></div></div>
+      <div class="rule"></div>
+      <div class="mu">
+        <div>
+          <div class="sc" style="color:var(--mute)">Poesía · forma fija</div>
+          <h3>Soneto</h3>
+          <p class="def">Composición poética de catorce versos de arte mayor, endecasílabos en su forma clásica.</p>
+          <p class="shape">Dos cuartetos y dos tercetos. El último terceto suele dar la vuelta a todo.</p>
+          <span class="cta">Escribe un cuarteto</span>
+        </div>
+        <div>
+          <div class="verse">
+            <p><span>Cerrar podrá mis ojos la postrera</span><b>11</b></p>
+            <p><span>sombra que me llevare el blanco día,</span><b>11</b></p>
+            <p><span>y podrá desatar esta alma mía</span><b>11</b></p>
+            <p><span>hora a su afán ansioso lisonjera;</span><b>11</b></p>
+          </div>
+          <div class="src">Francisco de Quevedo, «Amor constante más allá de la muerte», 1648. Dominio público, vía Wikisource. Definición: Wikipedia, CC BY-SA. El número al margen es la cuenta métrica.</div>
+        </div>
+      </div>
+    </div></div>
+    <div class="frame phone"><div class="ui">
+      <div class="mu">
+        <div>
+          <div class="sc" style="color:var(--mute)">Escribir · haiku</div>
+          <h3>Cinco, siete, cinco</h3>
+          <p class="shape">Una imagen del presente. La cuenta va al margen mientras escribes.</p>
+        </div>
+        <div class="count">
+          <p><span>Llueve en el patio</span><b>5</b></p>
+          <p><span>el gato mira el agua</span><b>7</b></p>
+          <p><span>y no se mueve</span><b>5</b></p>
+          <div class="src">Con sinalefa en «Llueve‿en» y «mira‿el». Sin ella, 6 y 8.</div>
+        </div>
+        <div class="acts" style="padding:18px 0 0"><span class="go">Guardar en el diario</span></div>
+      </div>
+    </div></div>
+  </div>
+  <div class="cap">Números al margen, fuente al pie. La muestra se lee como en un libro y se escribe en la misma página.</div>
+</section>
+
+<section>
+  <h2>Hecho</h2>
+  <div class="row">
+    <div class="frame phone"><div class="ui">
+      <div class="head"><div class="logo">Tild<i>é</i></div><div class="nav sc"><span>21 min</span></div></div>
+      <div class="rule"></div>
+      <div class="done">
+        <h3>Hecho.</h3>
+        <p class="sum">Ocho de diez tildes bien puestas.</p>
+        <dl>
+          <dt>Se te fueron</dt><dd><i>raíz</i>: hiato, la i tónica junto a la a lleva tilde.<br><i>examen</i>: llana terminada en -n, no lleva.</dd>
+          <dt>Escribiste</dt><dd>Llueve en el patio / el gato mira el agua / y no se mueve</dd>
+        </dl>
+        <div class="next">Siguiente en el camino: <b>La tilde en los hiatos</b>, lección 1, tema 3 de 7.</div>
+      </div>
+    </div></div>
+  </div>
+  <div class="cap">El cierre no cambia de color: una página más, con una palabra grande.</div>
+</section>
+</body>
+</html>

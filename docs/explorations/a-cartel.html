@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tilde · A · Cartel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #141414; --paper: #F2EEE3; --paper-2: #E7E1D2; --mute: #6E6A60; --line: #CFC9B8;
+    --c1: #C8862A; /* ocre: calentamiento */
+    --c2: #8E2B34; /* granate: lección */
+    --c3: #4C6B3C; /* oliva: escribir */
+    --c4: #22418F; /* azul tinta: hecho */
+    --font: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root { --ink: #F0ECE2; --paper: #151412; --paper-2: #1F1D19; --mute: #9B968A; --line: #35322B; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.35; padding: 32px 16px 96px; }
+  h1.dir { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mute); margin: 0 0 6px; }
+  p.about { max-width: 64ch; margin: 0 0 40px; color: var(--mute); }
+  p.about b { color: var(--ink); }
+  section { margin: 48px 0; }
+  section > h2 { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); margin: 0 0 14px; font-weight: 600; }
+  .row { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; padding-bottom: 8px; }
+  @media (min-width: 1660px) { .row { flex-wrap: nowrap; } }
+  .frame { flex: none; background: var(--paper); border: 1px solid var(--line); overflow: hidden; position: relative; }
+  .desk { width: 1180px; height: 740px; }
+  .phone { width: 390px; height: 800px; }
+  .ui { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .cap { font-size: 12px; color: var(--mute); margin-top: 8px; }
+
+  /* masthead */
+  .mast { display: flex; align-items: baseline; justify-content: space-between; padding: 22px 32px 0; }
+  .logo { font-weight: 800; font-size: 26px; letter-spacing: -0.03em; }
+  .logo i { font-style: normal; color: var(--c2); }
+  .nav { display: flex; gap: 22px; font-weight: 600; font-size: 15px; }
+  .nav span { color: var(--mute); } .nav span.on { color: var(--ink); border-bottom: 3px solid var(--ink); padding-bottom: 2px; }
+  .phone .mast { padding: 18px 20px 0; } .phone .nav { gap: 14px; font-size: 14px; }
+
+  /* today */
+  .today { flex: 1; display: flex; flex-direction: column; padding: 28px 32px 0; }
+  .phone .today { padding: 20px 20px 0; }
+  .date { font-size: 15px; color: var(--mute); font-weight: 600; margin-bottom: 14px; }
+  .blocks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; flex: 1; }
+  .phone .blocks { grid-template-columns: 1fr; grid-auto-rows: 1fr; }
+  .block { color: #fff; padding: 22px 22px 18px; display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; }
+  .block.c1 { background: var(--c1); } .block.c2 { background: var(--c2); } .block.c3 { background: var(--c3); }
+  .block .lab { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
+  .block .big { font-size: 64px; line-height: .92; font-weight: 800; letter-spacing: -0.035em; margin: 20px 0 10px; font-variation-settings: "opsz" 96; }
+  .phone .block .big { font-size: 42px; margin: 12px 0 6px; }
+  .block .sub { font-size: 16px; opacity: .92; }
+  .block .min { font-size: 15px; font-weight: 700; }
+  .bar { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px; border-top: 1px solid var(--line); }
+  .phone .bar { padding: 14px 20px; }
+  .week { display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--mute); }
+  .week i { width: 14px; height: 14px; border: 2px solid var(--ink); display: inline-block; }
+  .week i.d { background: var(--ink); } .week i.r { border-color: var(--line); }
+  .btn { background: var(--ink); color: var(--paper); font-weight: 800; font-size: 20px; padding: 14px 26px; letter-spacing: -0.01em; }
+
+  /* session */
+  .ses { flex: 1; display: flex; flex-direction: column; padding: 22px 32px 0; }
+  .phone .ses { padding: 18px 20px 0; }
+  .ses .top { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; color: var(--mute); }
+  .segs { display: flex; gap: 6px; margin: 12px 0 0; } .segs i { flex: 1; height: 5px; background: var(--paper-2); } .segs i.d { background: var(--c1); } .segs i.on { background: var(--ink); }
+  .word { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .word .w { font-size: 176px; line-height: 1; font-weight: 800; letter-spacing: -0.04em; font-variation-settings: "opsz" 96; }
+  .phone .word .w { font-size: 84px; }
+  .word .w u { text-decoration: none; border-bottom: 6px solid var(--c1); }
+  .phone .word .w u { border-bottom-width: 4px; }
+  .word .w em { font-style: normal; color: var(--c1); }
+  .word .why { font-size: 22px; max-width: 34ch; margin-top: 22px; }
+  .phone .word .why { font-size: 18px; }
+  .word .syl { font-size: 18px; color: var(--mute); letter-spacing: .12em; margin-top: 10px; }
+  .acts { display: flex; gap: 12px; padding: 0 32px 22px; }
+  .phone .acts { padding: 0 20px 18px; flex-wrap: wrap; }
+  .ghost { border: 2px solid var(--ink); padding: 12px 18px; font-weight: 700; font-size: 17px; }
+  .acts .btn { margin-left: auto; }
+  .phone .acts .btn { flex: 1 1 100%; text-align: center; }
+
+  /* muestra */
+  .mu { flex: 1; display: grid; grid-template-columns: 1fr 1fr; }
+  .mu .l { background: var(--c2); color: #fff; padding: 32px; display: flex; flex-direction: column; }
+  .mu .l .kind { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; opacity: .9; }
+  .mu .l .name { font-size: 96px; line-height: .9; font-weight: 800; letter-spacing: -0.04em; margin: 18px 0 22px; }
+  .mu .l p { font-size: 19px; max-width: 32ch; margin: 0 0 12px; }
+  .mu .l .cta { margin-top: auto; background: #fff; color: var(--c2); font-weight: 800; padding: 14px 20px; font-size: 19px; align-self: flex-start; }
+  .mu .r { padding: 32px; display: flex; flex-direction: column; }
+  .verse { font-size: 26px; line-height: 1.35; font-weight: 500; }
+  .verse div { display: flex; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); padding: 6px 0; }
+  .verse div b { color: var(--c2); font-weight: 800; }
+  .src { font-size: 14px; color: var(--mute); margin-top: 16px; }
+  .phone .mu { grid-template-columns: 1fr; }
+  .phone .mu .l { padding: 22px 20px; } .phone .mu .l .name { font-size: 56px; }
+  .phone .mu .r { padding: 20px; }
+  .phone .verse { font-size: 20px; }
+  .count { display: flex; justify-content: space-between; align-items: baseline; font-size: 20px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .count b { font-size: 34px; font-weight: 800; color: var(--c3); }
+  .count b.bad { color: var(--c2); }
+
+  /* done */
+  .done { flex: 1; background: var(--c4); color: #fff; padding: 26px 20px; display: flex; flex-direction: column; }
+  .done .h { font-size: 56px; line-height: .95; font-weight: 800; letter-spacing: -0.04em; margin: 8px 0 26px; }
+  .done li { font-size: 19px; margin: 0 0 12px; list-style: none; }
+  .done ul { padding: 0; margin: 0; }
+  .done .k { display: block; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; opacity: .8; font-weight: 600; }
+  .done .next { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.35); font-size: 17px; }
+</style>
+</head>
+<body>
+<h1 class="dir">Dirección A · Cartel</h1>
+<p class="about"><b>La hermana de Kata.</b> Bricolage Grotesque, bloques planos, texto gigante. Cambian los colores: ocre para calentar, granate para la lección, oliva para escribir, azul tinta para el momento de terminar. La tilde es el único adorno y aparece en color solo cuando importa.</p>
+
+<section>
+  <h2>Hoy</h2>
+  <div class="row">
+    <div class="frame desk"><div class="ui">
+      <div class="mast"><div class="logo">t<i>í</i>lde</div><div class="nav"><span class="on">Hoy</span><span>Camino</span><span>Muestras</span><span>Diario</span></div></div>
+      <div class="today">
+        <div class="date">Viernes 19 de septiembre</div>
+        <div class="blocks">
+          <div class="block c1"><div><div class="lab">Paso 1 · Calentamiento</div><div class="big">Diez tildes</div><div class="sub">canción, examen, raíz, árbol, también…</div></div><div class="min">3 min</div></div>
+          <div class="block c2"><div><div class="lab">Paso 2 · Lección 1 · tema 2 de 7</div><div class="big">Agudas, llanas y esdrújulas</div><div class="sub">Lee la página en Wikilengua y pon veinte tildes.</div></div><div class="min">12 min</div></div>
+          <div class="block c3"><div><div class="lab">Paso 3 · Escribir · opcional</div><div class="big">Un haiku</div><div class="sub">Cinco, siete, cinco. Tilde cuenta las sílabas.</div></div><div class="min">5 min</div></div>
+        </div>
+      </div>
+      <div class="bar"><div class="week"><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i></i><i class="r"></i><i class="r"></i>&nbsp; 3 de 5 esta semana</div><div class="btn">Empezar →</div></div>
+    </div></div>
+    <div class="frame phone"><div class="ui">
+      <div class="mast"><div class="logo">t<i>í</i>lde</div><div class="nav"><span class="on">Hoy</span><span>Camino</span><span>Muestras</span><span>Diario</span></div></div>
+      <div class="today">
+        <div class="date">Viernes 19 de septiembre</div>
+        <div class="blocks">
+          <div class="block c1"><div><div class="lab">Paso 1 · Calentamiento</div><div class="big">Diez tildes</div></div><div class="min">3 min</div></div>
+          <div class="block c2"><div><div class="lab">Paso 2 · Lección 1 · tema 2 de 7</div><div class="big">Agudas, llanas y esdrújulas</div></div><div class="min">12 min</div></div>
+          <div class="block c3"><div><div class="lab">Paso 3 · Escribir · opcional</div><div class="big">Un haiku</div></div><div class="min">5 min</div></div>
+        </div>
+      </div>
+      <div class="bar"><div class="week"><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i></i><i class="r"></i><i class="r"></i></div><div class="btn">Empezar →</div></div>
+    </div></div>
+  </div>
+  <div class="cap">Escritorio 1180 y teléfono 390. Los tres bloques son los tres pasos de la sesión, en orden.</div>
+</section>
+
+<section>
+  <h2>Sesión · calentamiento de tildes</h2>
+  <div class="row">
+    <div class="frame desk"><div class="ui">
+      <div class="ses">
+        <div class="top"><span>Paso 1 de 3 · Calentamiento · palabra 4 de 10</span><span>2:10</span></div>
+        <div class="segs"><i class="d"></i><i class="d"></i><i class="d"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="word">
+          <div class="w">canci<em>ó</em>n</div>
+          <div class="syl">can · ción</div>
+          <div class="why">Aguda que termina en <b>-n</b>: lleva tilde.</div>
+        </div>
+      </div>
+      <div class="acts"><div class="ghost">Ver la regla</div><div class="btn">Siguiente →</div></div>
+    </div></div>
+    <div class="frame phone"><div class="ui">
+      <div class="ses">
+        <div class="top"><span>Paso 1 de 3 · palabra 4 de 10</span><span>2:10</span></div>
+        <div class="segs"><i class="d"></i><i class="d"></i><i class="d"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="word">
+          <div class="w">c<u>a</u>nc<u>i</u><u>o</u>n</div>
+          <div class="why">Toca la vocal que lleva la tilde.</div>
+        </div>
+      </div>
+      <div class="acts"><div class="ghost">No lleva tilde</div><div class="ghost">Saltar</div></div>
+    </div></div>
+  </div>
+  <div class="cap">Antes de responder (teléfono): las vocales son el único control. Después (escritorio): la tilde en color, las sílabas y la regla en una línea.</div>
+</section>
+
+<section>
+  <h2>Muestra · una forma literaria</h2>
+  <div class="row">
+    <div class="frame desk"><div class="ui">
+      <div class="mast"><div class="logo">t<i>í</i>lde</div><div class="nav"><span>Hoy</span><span>Camino</span><span class="on">Muestras</span><span>Diario</span></div></div>
+      <div class="mu">
+        <div class="l"><div class="kind">Poesía · forma fija</div><div class="name">Soneto</div><p>Catorce endecasílabos: dos cuartetos y dos tercetos. El último terceto suele dar la vuelta a todo.</p><p style="opacity:.85;font-size:16px">Composición poética de catorce versos de arte mayor, endecasílabos en su forma clásica. — Wikipedia, CC BY-SA</p><div class="cta">Escribe un cuarteto →</div></div>
+        <div class="r">
+          <div class="verse">
+            <div><span>Cerrar podrá mis ojos la postrera</span><b>11</b></div>
+            <div><span>sombra que me llevare el blanco día,</span><b>11</b></div>
+            <div><span>y podrá desatar esta alma mía</span><b>11</b></div>
+            <div><span>hora a su afán ansioso lisonjera;</span><b>11</b></div>
+          </div>
+          <div class="src">Francisco de Quevedo, «Amor constante más allá de la muerte», 1648. Dominio público, vía Wikisource. El número es la cuenta métrica de cada verso.</div>
+        </div>
+      </div>
+    </div></div>
+    <div class="frame phone"><div class="ui">
+      <div class="mu">
+        <div class="l"><div class="kind">Escribir · haiku</div><div class="name">5 · 7 · 5</div><p>Una imagen del presente. Tilde cuenta las sílabas mientras escribes.</p></div>
+        <div class="r">
+          <div class="count"><span>Llueve en el patio</span><b>5</b></div>
+          <div class="count"><span>el gato mira el agua</span><b>7</b></div>
+          <div class="count"><span>y no se mueve</span><b>5</b></div>
+          <div class="src">Con sinalefa en «Llueve‿en» y «mira‿el». Sin ella serían 6 y 8.</div>
+        </div>
+        <div class="acts"><div class="btn">Guardar en el diario →</div></div>
+      </div>
+    </div></div>
+  </div>
+  <div class="cap">La muestra es siempre un texto real con su fuente. Escribir es la misma pantalla con la cuenta en vivo.</div>
+</section>
+
+<section>
+  <h2>Hecho</h2>
+  <div class="row">
+    <div class="frame phone"><div class="ui">
+      <div class="done">
+        <div class="k">Sesión hecha · 21 min</div>
+        <div class="h">Ocho de diez tildes.</div>
+        <ul>
+          <li><span class="k">Se te fueron</span>raíz: hiato, la i tónica junto a la a lleva tilde.<br>examen: llana terminada en -n, no lleva.</li>
+          <li><span class="k">Escribiste</span>Llueve en el patio / el gato mira el agua / y no se mueve</li>
+        </ul>
+        <div class="next"><span class="k">Siguiente en el camino</span>Lección 1 · tema 3 de 7 · La tilde en los hiatos</div>
+      </div>
+    </div></div>
+  </div>
+  <div class="cap">El azul tinta es el color del cierre, como el índigo en Kata.</div>
+</section>
+</body>
+</html>
