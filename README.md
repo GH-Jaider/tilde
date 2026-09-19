@@ -1,5 +1,7 @@
 # Tilde
 
+**En vivo: [gh-jaider.github.io/tilde](https://gh-jaider.github.io/tilde/)**. Ábrelo en el iPad o en el Mac y añádelo a la pantalla de inicio; funciona sin conexión después de la primera visita.
+
 Una lección al día para escribir bien en español: tildes, puntuación, mayúsculas, las letras que suenan igual, y una biblioteca de formas literarias para escribir cosas propias con seguridad. Hermana de [Kata](https://github.com/GH-Jaider/kata), hecha para un hablante nativo colombiano que nunca aprendió del todo a escribir.
 
 Tilde no inventa lecciones. Indexa la estructura de la *Ortografía de la lengua española* (RAE y ASALE, 2010), manda a leer a fuentes abiertas y bien hechas, y construye ejercicios cuya respuesta correcta sale siempre de una fuente real: el diccionario, el texto original o la métrica.
