@@ -53,6 +53,14 @@ export function nextItem() {
   save();
 }
 
+// The card before a block was read: do not show it again on reload.
+export function markIntro() {
+  const r = run.current;
+  r.intro ??= {};
+  r.intro[r.i] = true;
+  save();
+}
+
 export function setWriting(text) {
   run.current.writing.text = text;
   save();

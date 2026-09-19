@@ -27,13 +27,15 @@
   const doneToday = $derived(todayDone.reduce((a, s) => a + s.blocks.reduce((x, b) => x + (b.kind !== 'write' ? b.items || 0 : 0), 0), 0));
 
   const drillLine = (e) => cur.drills[e.drill] || '';
+  const readHref = (r) => (cur.sources[r.site] || '') + (r.site === 'fundeu' ? r.page + '/' : r.page);
   const lessonLine = $derived.by(() => {
     if (!ex) return '';
     const st = L.exerciseState(ex, db.progress);
     if (ex.drill === 'leer') return `Lee ${ex.read[0].title} y márcalo como leído. Eso es todo el tema.`;
     const n = lesson.items;
     const what = ex.drill === 'restaurar' ? `${n} ${L.unitLabel('textos', n)}` : ex.drill === 'pares' ? `${n} frases` : `${n} palabras`;
-    return `${st.count} de ${st.quota} ${ex.unit} hasta ahora. Hoy, ${what}. ${ex.read?.length ? `La lectura está en ${ex.read[0].title}.` : ''}`;
+    const first = (db.progress[ex.id]?.sessions || 0) < 2;
+    return `${first ? 'Primero la ficha del tema: qué es y cómo funciona, con ejemplos. Luego' : `${st.count} de ${st.quota} ${ex.unit} hasta ahora. Hoy,`} ${what}.`;
   });
   function start() { startRun($state.snapshot(plan)); navigate('sesion'); }
   function shuffle() { seed = L.uid(); sessionStorage.setItem('tilde.seed', seed); }
@@ -67,7 +69,7 @@
         <section class="blk c2" style="view-transition-name: block-lesson">
           <div class="k">Paso {stepOf('lesson')} · {L.exerciseContext(cur, ex)}</div>
           <div class="n">{ex.name}</div>
-          <div class="d">{lessonLine}</div>
+          <div class="d">{lessonLine}{#if ex.read?.length} <a class="rd" href={readHref(ex.read[0])} target="_blank" rel="noopener">Lectura completa: {ex.read[0].title} ↗</a>{/if}</div>
           <div class="m num">{L.blockMinutes(lesson)}<small>min</small></div>
         </section>
       {:else if !lesson}
@@ -86,7 +88,7 @@
     {#if fresh}
       <div class="page how">
         <p><b>Cómo funciona.</b> Tilde es el índice de la <i>Ortografía</i> de la RAE, en siete lecciones: tilde, puntuación, mayúsculas, palabras juntas o separadas, letras que suenan igual, números y extranjerismos. Cada lección son unos pocos temas con una cuota.</p>
-        <p>Cada día, una sesión en pasos: un calentamiento con tildes, un tema del camino y, si quieres, escribir algo corto. Las respuestas correctas salen del diccionario y de textos reales, nunca de nosotros. Cuando un tema llega a su cuota, el camino pasa al siguiente.</p>
+        <p>Cada día, una sesión en pasos: un calentamiento con tildes, un tema del camino y, si quieres, escribir algo corto. Cada tema empieza con una ficha corta, en nuestras palabras y con ejemplos, y enlaza la explicación completa. Las respuestas correctas salen del diccionario y de textos reales, nunca de nosotros. Cuando un tema llega a su cuota, el camino pasa al siguiente.</p>
       </div>
     {:else if todayDone.length}
       <div class="page sofar">
@@ -116,6 +118,7 @@
   .blk .k { opacity: .85; padding-right: 36%; }
   .blk .n { font-weight: 700; line-height: .95; letter-spacing: -.03em; font-size: clamp(26px, 5vw, 44px); max-width: 18ch; }
   .blk .d { opacity: .88; max-width: 44ch; font-size: clamp(14px, 1.5vw, 16px); }
+  .blk .rd { text-decoration: underline; text-underline-offset: 3px; font-weight: 700; white-space: nowrap; }
   .blk .m { position: absolute; right: var(--pad); top: calc(var(--pad) - 8px); font-weight: 700; line-height: .8; letter-spacing: -.06em; font-size: clamp(64px, 16vw, 120px); }
   .blk .m small { font-size: clamp(14px, 1.6vw, 18px); letter-spacing: 0; font-weight: 500; margin-left: 4px; }
   .go { font-size: inherit; font-weight: inherit; letter-spacing: inherit; }

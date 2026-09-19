@@ -4,7 +4,11 @@
   import { run, startRun } from '#lib/run.svelte.js';
   import { navigate } from '#lib/ui.svelte.js';
   import * as L from '#lib/logic.js';
+  import { fichaFor } from '#lib/fichas.js';
+  import Ficha from '#components/Ficha.svelte';
+  import Sheet from '#components/Sheet.svelte';
   import { slide } from 'svelte/transition';
+  let card = $state(null); // the exercise whose card is open
 
   const next = $derived(L.nextExercise(cur, db.progress));
   const firstOpen = L.nextExercise(cur, db.progress)?.unitId || cur.units[0].id;
@@ -48,6 +52,7 @@
                   <span class="exq num">{ex.drill === 'leer' ? (es.done ? 'leído' : 'sin leer') : `${es.count} / ${es.quota} ${ex.unit}`}</span>
                   <div class="exlinks">{#each ex.read as r}<a class="ext small" href={href(r)} target="_blank" rel="noopener">{r.title} ↗</a>{/each}</div>
                   <div class="exacts">
+                    {#if fichaFor(ex.id)}<button class="btn text dim" onclick={() => (card = { ...ex, unitId: u.id, unitIndex: ui, index: u.exercises.indexOf(ex), of: u.exercises.length })}>Ficha</button>{/if}
                     {#if ex.drill === 'leer'}<button class="btn text dim" onclick={() => setRead(ex.id, !es.done)}>{es.done ? 'Marcar como no leído' : 'Ya lo leí'}</button>
                     {:else}<button class="btn text dim" onclick={() => practise({ ...ex, unitId: u.id })}>Practicar</button>{/if}
                   </div>
@@ -66,11 +71,12 @@
         <h2 class="h-big">{next.name}</h2>
         <div class="big num">{L.countOf(db.progress, next.id)}<small>/ {next.quota} {next.unit}</small></div>
         <p class="small" style="opacity:.9">{cur.drills[next.drill]}</p>
-        <div class="acts"><button class="btn paper" onclick={() => practise(next)}>Practicar esto</button></div>
+        <div class="acts"><button class="btn paper" onclick={() => practise(next)}>Practicar esto</button>{#if fichaFor(next.id)}<button class="btn text" onclick={() => (card = next)}>Leer la ficha</button>{/if}</div>
       </aside>
     {/if}
   </div>
 </main>
+{#if card}<Sheet title="Ficha" onclose={() => (card = null)}><Ficha ex={card} ficha={fichaFor(card.id)} /></Sheet>{/if}
 
 <style>
   .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
@@ -98,7 +104,7 @@
   .ex.done .exname::before { content: '✓ '; color: var(--c4); }
   .exq { font-size: 13px; color: var(--mute); white-space: nowrap; }
   .exlinks { display: flex; flex-wrap: wrap; gap: 6px 14px; grid-column: 1; }
-  .exacts { grid-column: 2; justify-self: end; }
+  .exacts { grid-column: 2; justify-self: end; display: flex; gap: 14px; }
   .exbar { grid-column: 1 / -1; height: 4px; background: var(--paper-2); }
   .exbar i { display: block; height: 100%; background: var(--ink); }
   .ex.done .exbar i { background: var(--c4); }

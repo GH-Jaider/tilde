@@ -90,6 +90,11 @@ await b.shot('01-hoy-fresh');
 await clickText('Empezar');
 await waitBody('sílabas');
 await expect('Paso 1 de', 'session opened');
+await expect('Antes del ejercicio', 'the card comes first');
+await expect('golpe de voz', 'card explains what a syllable is');
+await b.shot('02-ficha');
+await clickText('Empezar el ejercicio');
+await waitBody('¿Cuántas sílabas?');
 await b.shot('02-session-silabas');
 await playBlock('sílabas');
 // writing step
@@ -112,7 +117,12 @@ ok('back on Hoy with today so far');
 await b.goto(BASE + '#/camino');
 await waitBody('Camino');
 await expect('Lección 1', 'path lists lessons');
-await b.shot('05-camino');
+await clickText('Leer la ficha');
+await waitBody('golpe de voz');
+ok('card opens from the path');
+await b.shot('05-camino-ficha');
+await b.eval(`document.querySelector('.sheet .head button').click()`);
+await sleep(300);
 await b.goto(BASE + '#/muestras');
 await waitBody('Muestras');
 await expect('Soneto', 'forms listed');
@@ -133,9 +143,10 @@ for (const [name, label] of [['Agudas, llanas y esdrújulas', 'tildes'], ['Monos
   await waitBody('Camino');
   const opened = await b.eval(`(() => { const rows = [...document.querySelectorAll('.unit .row')]; for (const r of rows) { if (!r.closest('.unit').classList.contains('open')) r.click(); } return rows.length; })()`);
   await sleep(400);
-  const started = await b.eval(`(() => { const ex = [...document.querySelectorAll('.ex')].find(e => e.querySelector('.exname')?.innerText.trim() === ${JSON.stringify(name)}); if (!ex) return false; ex.querySelector('.exacts button').click(); return true; })()`);
+  const started = await b.eval(`(() => { const ex = [...document.querySelectorAll('.ex')].find(e => e.querySelector('.exname')?.innerText.trim() === ${JSON.stringify(name)}); if (!ex) return false; const btn = [...ex.querySelectorAll('.exacts button')].find(b => b.innerText.trim() === 'Practicar'); if (!btn) return false; btn.click(); return true; })()`);
   if (!started) { fail(`could not start ${name}`); continue; }
   await waitBody('Paso 1 de 1');
+  if (await has('Antes del ejercicio')) { ok(`card shown before ${label}`); await clickText('Empezar el ejercicio'); }
   await sleep(500); await b.shot(`07-${label}`);
   await playBlock(label);
   await waitBody('Sesión hecha');

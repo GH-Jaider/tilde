@@ -1,7 +1,10 @@
 <script>
-  import { run, ensureItems, answer, nextItem, nextBlock, finishRun, discardRun } from '#lib/run.svelte.js';
+  import { run, ensureItems, answer, nextItem, nextBlock, finishRun, discardRun, markIntro } from '#lib/run.svelte.js';
   import { db, cur } from '#lib/store.svelte.js';
   import { navigate, withTransition, reduceMotion } from '#lib/ui.svelte.js';
+  import { fichaFor, RULE_TOPIC } from '#lib/fichas.js';
+  import Ficha from '#components/Ficha.svelte';
+  import Sheet from '#components/Sheet.svelte';
   import * as L from '#lib/logic.js';
   import Tildes from '../drills/Tildes.svelte';
   import Silabas from '../drills/Silabas.svelte';
@@ -25,6 +28,18 @@
   const item = $derived(items && r ? items[r.j] : null);
   const total = $derived(items ? items.length : 0);
   const okSoFar = $derived(r && r.answers[r.i] ? r.answers[r.i].filter((a) => a && a.ok).length : 0);
+  // The card before the exercise: the first two times a topic comes up. Afterwards it lives under "Ver la regla".
+  const ficha = $derived(ex ? fichaFor(ex.id) : null);
+  const showIntro = $derived(!!(r && block?.kind === 'lesson' && ex && ficha && block.drill !== 'leer' && !r.intro?.[r.i] && (db.progress[ex.id]?.sessions || 0) < 2));
+  let rule = $state(false);
+  // Which card explains the current item: the topic's own, or, in the warm-up, the one for the word's rule.
+  const ruleCard = $derived.by(() => {
+    if (ex && ficha) return { ex, ficha };
+    const id = item?.rule ? RULE_TOPIC[item.rule] : null;
+    const rex = id ? L.exerciseById(cur, id) : null;
+    return rex && fichaFor(id) ? { ex: rex, ficha: fichaFor(id) } : null;
+  });
+  function startDrill() { markIntro(); }
 
   $effect(() => { if (!run.current) navigate('hoy'); });
   $effect(() => {
@@ -66,15 +81,17 @@
   <div class="session" style={`view-transition-name: block-${block.kind}`}>
     <div class="s-top {color}">
       <span class="k">Paso {r.i + 1} de {r.plan.blocks.length} · {stepLabel}</span>
-      {#if block.kind !== 'write' && total}<span class="k num">{Math.min(r.j + 1, total)} de {total}</span>{/if}
+      {#if block.kind !== 'write' && total && !showIntro}<span class="k num">{Math.min(r.j + 1, total)} de {total}</span>{/if}
     </div>
-    {#if block.kind !== 'write' && total}
+    {#if block.kind !== 'write' && total && !showIntro}
       <div class="segs {color}" aria-hidden="true">{#each Array(total) as _, i}<i class:done={i < r.j} class:on={i === r.j}></i>{/each}</div>
     {/if}
 
     <div class="s-body">
       {#if block.kind === 'write'}
         <Escribir form={block.form} onsaved={skipWrite} onskip={skipWrite} />
+      {:else if showIntro}
+        <Ficha {ex} {ficha} intro onstart={startDrill} />
       {:else if !items}
         <p class="mute wait">Preparando…</p>
       {:else if !item}
@@ -104,10 +121,15 @@
             <button class="btn text dim" onclick={() => (confirm = false)}>Seguir</button>
           {:else}
             <button class="btn text dim" onclick={() => (confirm = true)}>Salir</button>
+            {#if ruleCard && !showIntro}<button class="btn text dim" onclick={() => (rule = true)}>Ver la regla</button>{/if}
             {#if result}<button class="btn next" onclick={advance}>{r.j + 1 < total ? 'Siguiente →' : last ? 'Terminar →' : `Ahora: ${nextName} →`}</button>{/if}
           {/if}
         </div>
       </div>
+    {/if}
+
+    {#if rule && ruleCard}
+      <Sheet title="La regla" onclose={() => (rule = false)}><Ficha ex={ruleCard.ex} ficha={ruleCard.ficha} /></Sheet>
     {/if}
 
     {#if moment}
