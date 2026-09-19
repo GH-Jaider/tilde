@@ -69,7 +69,7 @@
         <section class="blk c2" style="view-transition-name: block-lesson">
           <div class="k">Paso {stepOf('lesson')} · {L.exerciseContext(cur, ex)}</div>
           <div class="n">{ex.name}</div>
-          <div class="d">{lessonLine}{#if ex.read?.length} <a class="rd" href={readHref(ex.read[0])} target="_blank" rel="noopener">Lectura completa: {ex.read[0].title} ↗</a>{/if}</div>
+          <div class="d">{lessonLine}{#if ex.read?.length}{' '}<a class="rd" href={readHref(ex.read[0])} target="_blank" rel="noopener">Lectura completa: {ex.read[0].title} ↗</a>{/if}</div>
           <div class="m num">{L.blockMinutes(lesson)}<small>min</small></div>
         </section>
       {:else if !lesson}
