@@ -59,6 +59,10 @@ pnpm test:browser   # Chrome sin cabeza: primera sesión, cada ejercicio, todas 
 - `curricula/ortografia.json`: el camino, con enlaces de lectura verificados.
 - `src/content/`: lo que la app importa, compilado desde `content/` con `pnpm content`.
 
+## Fichas
+
+Cada tema abre con una ficha en nuestras palabras (`src/lib/fichas.js`): qué es, las reglas que importan, ejemplos y la trampa típica. Las 35 fichas están cotejadas línea a línea contra las páginas que enlazan; `node scripts/fuentes.mjs` descarga el texto de todas esas páginas a `data/raw/fuentes/` para volver a revisarlas cuando cambien. Si una ficha dice algo que la fuente no dice, es un error de la ficha.
+
 ## Contenido
 
 ```
